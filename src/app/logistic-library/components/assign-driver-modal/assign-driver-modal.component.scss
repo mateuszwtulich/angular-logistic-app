@@ -1,0 +1,27 @@
+.full-width-input{
+    margin-top: 0;
+    display: block;
+    widows: 50% !important;
+    &:nth-child(1){
+        margin-top: 0;
+    }
+}
+
+
+.button-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top:  5px;
+
+    button{
+        margin-left: 8px;
+        &:nth-child(1){
+            margin-left: 0;
+        }
+    }
+}
+
+#content{
+    width: 400px;
+}

@@ -1,0 +1,115 @@
+#toolbar{
+
+
+    margin: 15px;
+    .mat-toolbar{
+    height: 6rem;
+    justify-content: center;
+    
+    .mat-toolbar-row{
+        justify-content: center;
+        align-items: center;
+        
+            .mat-icon-button.large {
+                margin-left: 16px;
+                width: 48px;
+                height: 48px;
+                line-height: 48px;
+            
+                .mat-icon {
+                  font-size: 48px;
+                  width: 48px;
+                  height: 48px;
+                  line-height: 48px;
+                }
+            }
+
+            #number{
+                margin-left: auto;
+                margin-right: auto;
+                .h1{
+                    font-size: 40px !important;
+                }
+            }
+
+            #buttonsLeft{
+                margin-left: 0;
+                margin-right: auto;
+            }
+
+            #buttonsRight{
+                margin-right: 0;
+                margin-left: auto;
+            }
+
+          
+        }
+    }
+}
+
+#info{
+
+    margin-right: auto;
+    margin-left: 15px;
+    width: 1260px;
+    height: 755px;
+    float: left;
+    .mat-card{
+        margin: 15px;
+        border-radius: 0;
+        height: 17px;
+    }
+}
+
+#actions{
+    margin: 15px;
+    margin-right: 15px;
+    margin-left: auto;
+    width: 100px;
+    height: 755px;
+
+    .mat-icon-button.large {
+        margin-left: 16px;
+        width: 68px;
+        height: 68px;
+        line-height: 68px;
+        margin-top: 45px;
+    
+        .mat-icon {
+          font-size: 68px;
+          width: 68px;
+          height: 68px;
+          line-height: 68px;
+        }
+    }
+}
+
+
+#firstRow{
+    display: inline-block;
+    width: 605px;
+    margin-top: 15px;
+    margin-left: 25px;
+    margin-right: auto;
+    .mat-h4{
+        color: gray;
+    }
+}
+
+#secondRow{
+    display: inline-block;
+    margin-right: 0;
+    width: 605px;
+    margin-left: 10px;
+    .mat-h4{
+        color: gray;
+    }
+}
+
+#comment{
+    margin-left: 25px;
+    margin-right: 15px;
+    .mat-h4{
+        color: gray;
+    }
+}

@@ -1,0 +1,84 @@
+<div id="toolbar">
+    <mat-toolbar color="primary" class="mat-elevation-z5">
+        <mat-toolbar-row>
+            <div id="buttonsLeft">
+            <button mat-icon-button class="large" routerLink="/main-page">
+                <mat-icon>home</mat-icon>
+            </button>
+            <button mat-raised-button color="white" (click)="addJob()">
+                <mat-icon>add_circle</mat-icon> Job
+            </button>
+            </div>
+            <div class="filter-wrapper mat-elevation-z8">
+                <mat-form-field class="full-width">
+                    <input matInput (keyup)="filter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+            <div id="buttonsRight">
+                <button mat-icon-button class="large">
+                    <mat-icon>calendar_today</mat-icon>
+                </button>
+                <button mat-icon-button class="large">
+                    <mat-icon>info</mat-icon>
+                </button>
+                <button mat-icon-button class="large">
+                    <mat-icon>exit_to_app</mat-icon>
+                </button>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</div>
+<div id="table-wrapper">
+    <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="jobsDataSource" matSort>
+        <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Job number</th>
+            <td mat-cell *matCellDef="let job">{{job.number}}</td>
+        </ng-container>
+        <ng-container matColumnDef="lorry">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Lorry</th>
+            <td mat-cell *matCellDef="let job"><div *ngIf="job.driver!==null">{{job.driver.lorry.model}}</div></td>
+        </ng-container>
+        <ng-container matColumnDef="driver">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Driver</th>            
+            <td mat-cell  *matCellDef="let job"><div *ngIf="job.driver!==null">{{job.driver.name}} {{job.driver.surname}}</div></td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            
+            <td mat-cell *matCellDef="let job">
+                <div class="statusIcon" *ngIf="job.status == 'ASSIGNED'">
+                    <mat-icon> person</mat-icon>
+                    <div>{{job.status}}</div>
+            </div>
+            <div class="statusIcon" *ngIf="job.status == 'UNASSIGNED'">
+                <mat-icon> person_add</mat-icon>
+                <div>{{job.status}}</div>
+             </div>
+             <div class="statusIcon" *ngIf="job.status == 'FINISHED'">
+                <mat-icon>done_outline</mat-icon>
+                                <div>{{job.status}}</div>
+            </div>
+            <div class="statusIcon" *ngIf="job.status == 'IN_PROGRESS'">
+                <mat-icon>timer</mat-icon>
+                <div>{{job.status}}</div>
+            </div>  
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="startingPoint">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Starting Point</th>
+            <td mat-cell *matCellDef="let job">{{job.loading.address}}</td>
+        </ng-container>
+        <ng-container matColumnDef="destination">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Destination</th>
+            <td mat-cell *matCellDef="let job">{{job.unloading.address}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns:displayedColumns;" (click)="selectJob(row)" [routerLink]="['/job', row.id]"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5,10,15]"></mat-paginator>
+</div>
+    <div *ngIf="isSpinnerDisplayed" class="spinner-wrapper">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>

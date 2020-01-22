@@ -1,0 +1,104 @@
+<div id="toolbar">
+    <mat-toolbar color="primary" class="mat-elevation-z8">
+        <mat-toolbar-row>
+            <div id="buttonsLeft">
+                <button mat-icon-button class="large" routerLink="/jobs-management">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+            </div>
+            <div id="number">
+                <h1 style="font-size: xx-large;">Job {{job.number}}</h1>
+            </div>
+            <div id="buttonsRight">
+                <button mat-icon-button class="large">
+                    <mat-icon>info</mat-icon>
+                </button>
+                <button mat-icon-button class="large">
+                    <mat-icon>exit_to_app</mat-icon>
+                </button>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</div>
+
+<div id="info" class="container mat-elevation-z8">
+    <div id="firstRow" class="col-6">
+        <div class="textArea ">
+            <h4 class="mat-h4">Commisssioned Party</h4>
+            <mat-card class="mat-elevation-z6">{{job.commissionedParty}}</mat-card>
+        </div>
+        <div class="textArea">
+            <h4 class="mat-h4">Date</h4>
+            <mat-card class="mat-elevation-z6">{{job.date}}</mat-card>
+        </div>
+        <div class="textArea">
+            <h4 class="mat-h4">Principal</h4>
+            <mat-card class="mat-elevation-z6">{{job.principal.name}}</mat-card>
+        </div>
+        <div class="textArea">
+            <h4 class="mat-h4">Driver</h4>
+            <mat-card class="mat-elevation-z6"><div *ngIf="job.driver!==null">{{job.driver.name}} {{job.driver.surname}}</div></mat-card>
+        </div>
+        <div id="textArea">
+            <h4 class="mat-h4">Lorry</h4>
+            <mat-card class="mat-elevation-z6"><div *ngIf="job.driver!==null">{{job.driver.lorry.model}}</div></mat-card>
+        </div>
+        <div class="textArea">
+            <h4 class="mat-h4">Manager</h4>
+            <mat-card class="mat-elevation-z6">{{job.manager.name}} {{job.manager.surname}}</mat-card>
+        </div>
+        <div class="textArea">
+            <h4 class="mat-h4">Cargo</h4>
+            <mat-card class="mat-elevation-z6">{{job.cargo.type}}</mat-card>
+        </div>
+
+    </div>
+    <div id="secondRow" class="col-6">
+        <div class="textArea">
+            <h4 class="mat-h4">Loading place</h4>
+            <mat-card class="mat-elevation-z6">{{job.loading.address}}</mat-card>
+        </div>
+        <div class="textArea">
+            <h4 class="mat-h4">Unloading Place</h4>
+            <mat-card class="mat-elevation-z6">{{job.unloading.address}}</mat-card>
+        </div>
+        <div class="textArea">
+            <h4 class="mat-h4">Job status</h4>
+            <mat-card class="mat-elevation-z6">{{job.status}}</mat-card>
+        </div>
+        <div class="textArea">
+            <h4 class="mat-h4">Place of Issue</h4>
+            <mat-card class="mat-elevation-z6">{{job.placeOfIssue}}</mat-card>
+        </div>
+        <div class="textArea">
+            <h4 class="mat-h4">Weight</h4>
+            <mat-card class="mat-elevation-z6">{{job.weight}}</mat-card>
+        </div>
+        <div class="textArea">
+            <h4 class="mat-h4">Pay rate</h4>
+            <mat-card class="mat-elevation-z6">{{job.payRate}}</mat-card>
+        </div>
+        <div id="textArea">
+            <h4 class="mat-h4">Comment</h4>
+            <mat-card class="mat-elevation-z6">{{job.comment}}</mat-card>
+        </div>   
+    </div>
+
+</div>
+<div id="actions" class="mat-elevation-z8">
+    <button mat-icon-button class="large" (click)="assignDriver()"[disabled]="job.status!='UNASSIGNED'">
+        <mat-icon> person_add</mat-icon>
+    </button>
+    <button mat-icon-button class="large" (click)="finishJob()" [disabled]="job.status!='IN_PROGRESS'">
+        <mat-icon>done_outline</mat-icon>
+    </button>
+    <button mat-icon-button class="large">
+        <mat-icon>note_add</mat-icon>
+    </button>
+    <button mat-icon-button class="large" (click)="modifyJob()" [disabled]="job.status== 'FINISHED'">
+        <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button class="large" (click)="deleteJob()" [disabled]="job.status=='IN_PROGRESS'">
+        <mat-icon>delete</mat-icon>
+    </button>
+</div>

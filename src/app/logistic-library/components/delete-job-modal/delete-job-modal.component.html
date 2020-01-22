@@ -1,0 +1,7 @@
+<h2 class="mat-h2">Do you want to delete {{data.number}} job?</h2>
+<form>
+<div class="button-wrapper">
+    <button mat-stroked-button type="button" color="accent" (click)="closeDialog()">Cancel</button>
+    <button mat-flat-button [mat-dialog-close]="job" color="warn" cdkFocusInitial (click)="deleteJob()">Delete</button>
+</div>
+</form>

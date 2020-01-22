@@ -1,0 +1,67 @@
+<div id="content">
+<form (ngSubmit)="modifyJob()">
+    <mat-form-field class="full-width-input " >
+        <input matInput [formControl]="numberControl" placeholder="Job number" [ngModel]="data.number" name="number" required>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+        <input matInput [formControl]="commissionedPartyControl" placeholder="Commissioned Party" [ngModel]="data.commissionedParty" name="commissionedParty" required>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+        <mat-label>Principal</mat-label>
+        <mat-select [formControl]="principalControl" name="principal" [ngModel]="data.principal" required>
+            <mat-option *ngFor="let principal of principals" [value]="principal">
+                {{principal.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+        <mat-label>Driver</mat-label>
+        <mat-select [formControl]="driverControl" name="driver" [ngModel]="data.driver">
+            <!-- <mat-option [value]=null></mat-option> -->
+            <mat-option *ngFor="let driver of drivers" [value]="driver">
+                {{driver.name}} {{driver.surname}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+        <mat-label>Cargo</mat-label>
+        <mat-select [formControl]="cargoControl" name="cargo" [ngModel]="data.cargo" required > 
+            <mat-option *ngFor="let cargo of cargos" [value]="cargo">
+                {{cargo.type}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+        <mat-label>Loading place</mat-label>
+        <mat-select [formControl]="loadingControl" name="loading" required [ngModel]="data.loading">
+            <mat-option *ngFor="let loading of loadings" [value]="loading">
+                {{loading.address}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+        <mat-label>Unloading place</mat-label>
+        <mat-select [formControl]="unloadingControl" name="unloading" required [ngModel]="data.unloading">
+            <mat-option *ngFor="let unloading of unloadings" [value]="unloading">
+                {{unloading.address}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+        <input matInput [formControl]="placeOfIssueControl" placeholder="Place of issue" [ngModel]="placeOfIssue" name="placeOfIssue" required>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+        <input matInput [formControl]="weightControl" placeholder="Weight" [ngModel]="data.weight" name="weight" required>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+        <input matInput [formControl]="payRateControl" placeholder="Pay Rate" [ngModel]="data.payRate" name="payRate" required>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+        <input matInput [formControl]="commentControl" placeholder="Comment" [ngModel]="data.comment" name="comment" required>
+    </mat-form-field>
+    <div class="button-wrapper">
+        <button mat-stroked-button type="button" color="accent" (click)="closeDialog()">Cancel</button>
+        <button mat-flat-button type="submit" color="primary" close>Modify</button>
+    </div>
+</form>
+</div>

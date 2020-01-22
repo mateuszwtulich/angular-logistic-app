@@ -1,0 +1,16 @@
+<div id="content">
+<form (ngSubmit)="modifyJob()">
+<mat-form-field class="full-width-input">
+    <mat-label>Driver</mat-label>
+    <mat-select [formControl]="driverControl" name="driver" [ngModel]="data.driver" required>
+        <mat-option *ngFor="let driver of drivers" [value]="driver" >
+            {{driver.name}} {{driver.surname}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<div class="button-wrapper">
+    <button mat-stroked-button type="button" color="accent" (click)="closeDialog()">Cancel</button>
+    <button mat-flat-button type="submit" color="primary" close>Modify</button>
+</div>
+</form>
+</div>

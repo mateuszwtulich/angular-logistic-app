@@ -1,0 +1,99 @@
+
+#toolbar{
+
+    margin: 15px;
+
+    .mat-toolbar{
+    height: 6rem;
+    justify-content: center;
+    
+    .mat-toolbar-row{
+        justify-content: center;
+        align-items: center;
+
+        #buttons{
+            margin-right: 0;
+            margin-left: 0;
+            
+            .mat-icon-button.large {
+                margin-left: 10px;
+                width: 48px;
+                height: 48px;
+                line-height: 48px;
+            
+                .mat-icon {
+                  font-size: 48px;
+                  width: 48px;
+                  height: 48px;
+                  line-height: 48px;
+                }
+              }
+        }
+        
+        #logo{
+            margin-right: auto;
+            margin-left: auto;
+
+            .mat-card{
+                padding-left: 180px !important;
+                padding-right: 180px !important;
+                border-radius: 0px !important;
+                justify-content: center;
+                font-weight: bold;
+                color: #303f9f;
+                }
+            }
+        }
+    }
+}
+
+.mat-icon {
+    font-size: 80px;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+  }
+
+  #cards{
+      .mat-card{
+        border-radius: 0px !important;
+        margin-bottom: 1rem !important;
+        padding: 0;
+
+       .mat-icon{
+           padding-left: 6rem;
+           padding-top: 2rem;
+           padding-bottom: 2rem;
+           float: left;
+
+       }
+
+       .mat-card-header{
+            display: inline-block !important;
+            align-content: center !important;
+            text-justify: center !important;
+            justify-content: center !important;
+            text-align: center;
+       }
+
+       .mat-card-title{
+           font-size: 26px;
+            display: inline-block !important;
+            padding-bottom: 60px;
+            padding-top: 60px;
+            margin-bottom: 0;
+            padding-left: 22rem;
+    }
+        }
+      margin: 1rem;
+  }
+
+  .title{
+    text-justify: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+.icon{
+    margin-right: 0;
+    margin-left: 0;
+}
