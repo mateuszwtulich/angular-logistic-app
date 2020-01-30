@@ -11,18 +11,13 @@ export class Unloading {
       this.address = otherUnloading.address;
     }
   
-    modify(modifiedUnloading: Unloading): void {
-      this.id = modifiedUnloading.id;
-      this.address = modifiedUnloading.address;
-    }
-  
     toString(): String {
       return `Address: ${this.address}`
     }
   
-    static convertToUnloadingDto(Unloading: Unloading): UnloadingDto {
+    static convertToUnloadingDto(unloading: Unloading): UnloadingDto {
       return {
-        address: Unloading.address
+        address: unloading.address
       }
     }
   }

@@ -3,11 +3,12 @@ import { JobService } from '../../services/job/job.service';
 import { Job } from '../../models/job';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddJobModalComponent } from '../add-job-modal/add-job-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs';
+import { SortUtil } from '../../utils/SortUtil';
 
 @Component({
   selector: 'cf-jobs-management',
@@ -31,7 +32,7 @@ export class JobsManagementComponent implements OnInit {
 
   ngOnInit() {
     this.jobsDataSource.paginator = this.paginator;
-    this.cofigureSorting();
+    this.cofigureSortingAndFiltering();
     this.loadJobs();
   }
 
@@ -43,15 +44,50 @@ export class JobsManagementComponent implements OnInit {
     });
   }
 
-  private cofigureSorting(){
-    this.sort.active = 'number';
-    this.sort.direction = 'asc';
-    this.sort.disableClear = true;
-    this.jobsDataSource.sort = this.sort;
+  refresh(){
+    this.loadJobs();
   }
 
-  filter(filterValue: string){
-    this.jobsDataSource.filter = filterValue.trim().toLocaleLowerCase();
+  private cofigureSortingAndFiltering(){
+    // this.jobsDataSource.data.slice();
+    // this.sort.active = 'number';
+    // this.sort.direction = 'asc';
+    // this.sort.disableClear = true;
+    this.jobsDataSource.sort = this.sort;
+    this.jobsDataSource.filterPredicate = this.prepareFilterPredicate();
+  }
+
+  filter(filterValue: string) {
+    this.jobsDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  private prepareFilterPredicate(): (data: Job, filter: string) => boolean {
+    return (data: Job, filter: string) => {
+      var jobString = data.number.toString() + data.status.toString() + data.loading.address + data.unloading.address;
+      if(data.driver != null){
+        jobString = jobString + data.driver.name + data.driver.surname + data.driver.lorry.model;
+      }
+      return jobString.trim().toLowerCase().indexOf(filter) !== -1;
+    }
+  }
+
+  sortData(sort: Sort) {
+    const data = this.jobsDataSource.data.slice();
+    if (!sort.active || sort.direction === '') {
+      this.jobsDataSource.data = data;
+    }
+    this.jobsDataSource.data = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'number': return SortUtil.compare(a.number, b.number, isAsc);
+        case 'driver': return SortUtil.compare(a.driver.name, b.driver.name, isAsc);
+        case 'lorry': return SortUtil.compare(a.driver.lorry.model, b.driver.lorry.model, isAsc);
+        case 'status': return SortUtil.compare(a.status, b.status, isAsc);
+        case 'startingPoint': return SortUtil.compare(a.loading.address, b.loading.address, isAsc);
+        case 'destination': return SortUtil.compare(a.unloading.address, b.unloading.address, isAsc);
+        default: return 0;
+      }
+    });
   }
 
   addJob(){
@@ -65,7 +101,7 @@ export class JobsManagementComponent implements OnInit {
 
   private openAddJobModal(){
     return this.dialog.open(AddJobModalComponent,{
-      width: "400px"});
+      width: "540px"});
   }
 
   private handleClosingAddJobModal(dialogRef: MatDialogRef<AddJobModalComponent>){

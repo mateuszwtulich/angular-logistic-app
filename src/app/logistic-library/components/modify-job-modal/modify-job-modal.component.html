@@ -1,67 +1,96 @@
-<div id="content">
+<div id="container">
 <form (ngSubmit)="modifyJob()">
-    <mat-form-field class="full-width-input " >
-        <input matInput [formControl]="numberControl" placeholder="Job number" [ngModel]="data.number" name="number" required>
-    </mat-form-field>
     <mat-form-field class="full-width-input">
-        <input matInput [formControl]="commissionedPartyControl" placeholder="Commissioned Party" [ngModel]="data.commissionedParty" name="commissionedParty" required>
+        <input matInput [formControl]="commissionedPartyControl" placeholder="Commissioned Party" [(ngModel)]="job.commissionedParty" name="commissionedParty" required>
     </mat-form-field>
-    <mat-form-field class="full-width-input">
+    <mat-form-field class="input-with-toggle" *ngIf="!isNewPrincipalRequired">
         <mat-label>Principal</mat-label>
-        <mat-select [formControl]="principalControl" name="principal" [ngModel]="data.principal" required>
-            <mat-option *ngFor="let principal of principals" [value]="principal">
+        <mat-select [formControl]="principalControl" [(ngModel)]="job.principal.id" name="principal" required>
+            <mat-option *ngFor="let principal of principals" [(value)]="principal.id" (click)="loadFromPrincipal(principal.id)">
                 {{principal.name}}
             </mat-option>
         </mat-select>
     </mat-form-field>
+    <mat-form-field *ngIf="isNewPrincipalRequired" class="input-with-toggle">
+        <input matInput [formControl]="newPrincipalNameControl" placeholder="Principal name" name="principalName" [value]="" required>
+      </mat-form-field>
+      <mat-form-field *ngIf="isNewPrincipalRequired" class="input-with-toggle">
+        <input matInput [formControl]="newPrincipalAddressControl" placeholder="Principal address" name="principalAddress" [value]="" required>
+      </mat-form-field>
+      <mat-slide-toggle color="primary" [checked]="isNewPrincipalRequired" (change)="newPrincipalRequired()">New principal
+    </mat-slide-toggle>
+    <mat-form-field *ngIf="!isNewCargoRequired" class="input-with-toggle">
+        <mat-label>Cargo</mat-label>
+        <mat-select [formControl]="cargoControl" name="cargo"  [(ngModel)]="job.cargo.id" required>
+            <mat-option *ngFor="let cargo of cargos" [(value)]="cargo.id">
+                {{cargo.type}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="isNewCargoRequired" class="input-with-toggle">
+        <input matInput [formControl]="newCargoControl" placeholder="Cargo type" name="cargoType" [value]="" required>
+      </mat-form-field>
+      <mat-slide-toggle color="primary" [checked]="isNewCargoRequired" (change)="newCargoRequired()">New cargo
+    </mat-slide-toggle>
+    <mat-form-field *ngIf="!isNewLoadingRequired" class="input-with-toggle">
+        <mat-label>Loading place</mat-label>
+        <mat-select [formControl]="loadingControl" name="loading" required [(ngModel)]="job.loading.id">
+            <mat-option *ngFor="let loading of loadings" [(value)]="loading.id" required>
+                {{loading.address}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="isNewLoadingRequired" class="input-with-toggle">
+        <input matInput [formControl]="newLoadingControl" placeholder="Loading address" name="loadingAddress" [value]="" required>
+      </mat-form-field>
+      <mat-slide-toggle color="primary" [checked]="isNewLoadingRequired" (change)="newLoadingRequired()">New address
+    </mat-slide-toggle>
+    <mat-form-field *ngIf="!isNewUnloadingRequired" class="input-with-toggle">
+        <mat-label>Unloading place</mat-label>
+        <mat-select [formControl]="unloadingControl" name="unloading" required [(ngModel)]="job.unloading.id">
+            <mat-option *ngFor="let unloading of unloadings" [(value)]="unloading.id">
+                {{unloading.address}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="isNewUnloadingRequired" class="input-with-toggle">
+        <input matInput [formControl]="newUnloadingControl" placeholder="Unloading address" name="unloadingAddress" [value]="" required>
+      </mat-form-field>
+      <mat-slide-toggle color="primary" [checked]="isNewUnloadingRequired" (change)="newUnloadingRequired()">New address
+    </mat-slide-toggle>
     <mat-form-field class="full-width-input">
         <mat-label>Driver</mat-label>
-        <mat-select [formControl]="driverControl" name="driver" [ngModel]="data.driver">
-            <!-- <mat-option [value]=null></mat-option> -->
-            <mat-option *ngFor="let driver of drivers" [value]="driver">
+        <mat-select *ngIf="job.driver!=null" [formControl]="driverControl" name="driver" [(ngModel)]="job.driver.id">
+            <mat-option [value]="">-----</mat-option>
+            <mat-option *ngFor="let driver of drivers" [(value)]="driver.id">
+                {{driver.name}} {{driver.surname}}
+            </mat-option>
+        </mat-select>
+        <mat-select *ngIf="job.driver==null" [formControl]="driverControl" name="driver" [(ngModel)]="job.driver">
+            <mat-option [value]="">-----</mat-option>
+            <mat-option *ngFor="let driver of drivers" [(value)]="driver">
                 {{driver.name}} {{driver.surname}}
             </mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field class="full-width-input">
-        <mat-label>Cargo</mat-label>
-        <mat-select [formControl]="cargoControl" name="cargo" [ngModel]="data.cargo" required > 
-            <mat-option *ngFor="let cargo of cargos" [value]="cargo">
-                {{cargo.type}}
-            </mat-option>
-        </mat-select>
+        <input matInput [formControl]="placeOfIssueControl" placeholder="Place of issue" name="placeOfIssue" required [(ngModel)]="job.placeOfIssue">
     </mat-form-field>
     <mat-form-field class="full-width-input">
-        <mat-label>Loading place</mat-label>
-        <mat-select [formControl]="loadingControl" name="loading" required [ngModel]="data.loading">
-            <mat-option *ngFor="let loading of loadings" [value]="loading">
-                {{loading.address}}
-            </mat-option>
-        </mat-select>
+        <input matInput [formControl]="weightControl" placeholder="Weight in kg" name="weight" required [(ngModel)]="job.weight">
     </mat-form-field>
     <mat-form-field class="full-width-input">
-        <mat-label>Unloading place</mat-label>
-        <mat-select [formControl]="unloadingControl" name="unloading" required [ngModel]="data.unloading">
-            <mat-option *ngFor="let unloading of unloadings" [value]="unloading">
-                {{unloading.address}}
-            </mat-option>
-        </mat-select>
+        <input matInput [formControl]="payRateControl" placeholder="Pay Rate in PLN" name="payRate" required [(ngModel)]="job.payRate">
     </mat-form-field>
     <mat-form-field class="full-width-input">
-        <input matInput [formControl]="placeOfIssueControl" placeholder="Place of issue" [ngModel]="placeOfIssue" name="placeOfIssue" required>
-    </mat-form-field>
-    <mat-form-field class="full-width-input">
-        <input matInput [formControl]="weightControl" placeholder="Weight" [ngModel]="data.weight" name="weight" required>
-    </mat-form-field>
-    <mat-form-field class="full-width-input">
-        <input matInput [formControl]="payRateControl" placeholder="Pay Rate" [ngModel]="data.payRate" name="payRate" required>
-    </mat-form-field>
-    <mat-form-field class="full-width-input">
-        <input matInput [formControl]="commentControl" placeholder="Comment" [ngModel]="data.comment" name="comment" required>
+        <input matInput [formControl]="commentControl" placeholder="Comment" name="comment" required [(ngModel)]="job.comment">
     </mat-form-field>
     <div class="button-wrapper">
         <button mat-stroked-button type="button" color="accent" (click)="closeDialog()">Cancel</button>
-        <button mat-flat-button type="submit" color="primary" close>Modify</button>
+        <button mat-flat-button type="submit" color="primary">Modify</button>
     </div>
 </form>
+<div *ngIf="isSpinnerDisplayed" class="spinner-wrapper">
+    <mat-spinner></mat-spinner>
+</div>
 </div>

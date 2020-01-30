@@ -3,7 +3,7 @@
 <mat-form-field class="full-width-input">
     <mat-label>Driver</mat-label>
     <mat-select [formControl]="driverControl" name="driver" [ngModel]="data.driver" required>
-        <mat-option *ngFor="let driver of drivers" [value]="driver" >
+        <mat-option *ngFor="let driver of drivers" [(value)]="driver" >
             {{driver.name}} {{driver.surname}}
         </mat-option>
     </mat-select>

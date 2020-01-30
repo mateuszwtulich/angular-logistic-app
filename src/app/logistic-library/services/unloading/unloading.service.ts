@@ -27,7 +27,9 @@ export class UnloadingService {
   }
 
   public addUnloading(unloading: Unloading): Observable<Unloading> {
+    console.log(unloading);
     const unloadingDto: UnloadingDto = Unloading.convertToUnloadingDto(unloading);
+    console.log(unloadingDto);
     return this.http.post<Unloading>(this.UnloadingEndpoint, unloadingDto).pipe(
       map((newUnloading: Unloading) => new Unloading(newUnloading))
     );

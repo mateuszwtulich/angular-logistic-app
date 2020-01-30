@@ -58,23 +58,23 @@ export class Job {
       this.payRate = otherJob.payRate
     }
   
-    modify(modifiedJob: Job): void {
-      this.id = modifiedJob.id;
-      this.number = modifiedJob.number
-      this.date = modifiedJob.date
-      this.commissionedParty = modifiedJob.commissionedParty
-      this.principal = modifiedJob.principal
-      this.driver = modifiedJob.driver
-      this.manager = modifiedJob.manager
-      this.cargo = modifiedJob.cargo
-      this.loading = modifiedJob.loading
-      this.unloading = modifiedJob.unloading
-      this.status = modifiedJob.status
-      this.placeOfIssue = modifiedJob.placeOfIssue
-      this.comment = modifiedJob.comment
-      this.weight = modifiedJob.weight
-      this.payRate = modifiedJob.payRate
-    }
+    // modify(modifiedJob: Job): void {
+    //   this.id = modifiedJob.id;
+    //   this.number = modifiedJob.number
+    //   this.date = modifiedJob.date
+    //   this.commissionedParty = modifiedJob.commissionedParty
+    //   this.principal = modifiedJob.principal
+    //   this.driver = modifiedJob.driver
+    //   this.manager = modifiedJob.manager
+    //   this.cargo = modifiedJob.cargo
+    //   this.loading = modifiedJob.loading
+    //   this.unloading = modifiedJob.unloading
+    //   this.status = modifiedJob.status
+    //   this.placeOfIssue = modifiedJob.placeOfIssue
+    //   this.comment = modifiedJob.comment
+    //   this.weight = modifiedJob.weight
+    //   this.payRate = modifiedJob.payRate
+    // }
   
     toString(): String {
       return `Number: ${this.number}, Principal: ${this.principal.name}`

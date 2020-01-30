@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Endpoints } from '../../enums/Endpoints';
 import { Principal, PrincipalDto } from '../../models/principal';
+import { Loading } from '../../models/Loading';
+import { Cargo } from '../../models/Cargo';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,16 @@ export class PrincipalService {
   public getPrincipals(): Observable<Principal[]> {
     return this.http.get<Principal[]>(this.PrincipalEndpoint).pipe(
       map((data: Principal[]) => data.map((principal: Principal) => new Principal(principal))));
+  }
+
+  public getLoadingsFromPrincipal(principalId: number): Observable<Loading[]> {
+    return this.http.get<Loading[]>(`${this.PrincipalEndpoint}/${principalId}/loadings`).pipe(
+      map((data: Loading[]) => data.map((loading: Loading) => new Loading(loading))));
+  }
+
+  public getCargosFromPrincipal(principalId: number): Observable<Cargo[]> {
+    return this.http.get<Cargo[]>(`${this.PrincipalEndpoint}/${principalId}/cargos`).pipe(
+      map((data: Cargo[]) => data.map((cargo: Cargo) => new Cargo(cargo))));
   }
 
   public getPrincipal(principalId: number): Observable<Principal> {

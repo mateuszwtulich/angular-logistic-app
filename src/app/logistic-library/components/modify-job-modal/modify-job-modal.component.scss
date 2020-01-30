@@ -1,12 +1,19 @@
 .full-width-input{
     margin-top: 0;
     display: block;
-    widows: 50% !important;
+    widows: 70% !important;
     &:nth-child(1){
         margin-top: 0;
     }
 }
 
+.input-with-toggle{
+    width: 300px;
+}
+
+.mat-slide-toggle{
+    margin-left: 2rem !important;
+}
 
 .button-wrapper{
     width: 100%;
@@ -22,6 +29,18 @@
     }
 }
 
-#content{
-    width: 400px;
+#container{
+    width: 500px !important;
+}
+
+.spinner-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, 0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

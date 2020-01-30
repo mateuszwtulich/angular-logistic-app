@@ -24,11 +24,12 @@ import { DeleteJobModalComponent } from './components/delete-job-modal/delete-jo
 import { ModifyJobModalComponent } from './components/modify-job-modal/modify-job-modal.component';
 import { AssignDriverModalComponent } from './components/assign-driver-modal/assign-driver-modal.component';
 import { FinishJobModalComponent } from './components/finish-job-modal/finish-job-modal.component';
-import { GenerateReportModalComponent } from './components/generate-report-modal/generate-report-modal.component';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
-  declarations: [MainPageComponent, JobsManagementComponent, AddJobModalComponent, SingleJobComponent, DeleteJobModalComponent, ModifyJobModalComponent, AssignDriverModalComponent, FinishJobModalComponent, GenerateReportModalComponent],
+  declarations: [MainPageComponent, JobsManagementComponent, AddJobModalComponent, SingleJobComponent,
+     DeleteJobModalComponent, ModifyJobModalComponent, AssignDriverModalComponent, FinishJobModalComponent, ],
   imports: [
     CommonModule,
     LogisticLibraryRoutingModule,
@@ -46,8 +47,10 @@ import { GenerateReportModalComponent } from './components/generate-report-modal
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSlideToggleModule
   ],
+  providers: [DatePipe],
   exports: [MainPageComponent, JobsManagementComponent, SingleJobComponent],
   entryComponents:[
     AddJobModalComponent, DeleteJobModalComponent, FinishJobModalComponent,

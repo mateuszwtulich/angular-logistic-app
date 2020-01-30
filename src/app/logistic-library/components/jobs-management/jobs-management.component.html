@@ -15,13 +15,13 @@
                 </mat-form-field>
             </div>
             <div id="buttonsRight">
-                <button mat-icon-button class="large">
+                <!-- <button mat-icon-button class="large">
                     <mat-icon>calendar_today</mat-icon>
+                </button> -->
+                <button mat-icon-button class="large" (click)="refresh()">
+                    <mat-icon>refresh</mat-icon>
                 </button>
-                <button mat-icon-button class="large">
-                    <mat-icon>info</mat-icon>
-                </button>
-                <button mat-icon-button class="large">
+                <button mat-icon-button class="large" routerLink="/main-page">
                     <mat-icon>exit_to_app</mat-icon>
                 </button>
             </div>
@@ -76,7 +76,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns:displayedColumns;" (click)="selectJob(row)" [routerLink]="['/job', row.id]"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5,10,15]"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[8,16]"></mat-paginator>
 </div>
     <div *ngIf="isSpinnerDisplayed" class="spinner-wrapper">
         <mat-spinner></mat-spinner>

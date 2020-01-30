@@ -27,6 +27,7 @@ export class JobService {
   }
 
   public addJob(job: Job): Observable<Job> {
+    console.log(job);
     const jobDto: JobDto = Job.convertToJobDto(job);
     console.log(jobDto);
     return this.http.post<Job>(this.JobEndpoint, jobDto).pipe(

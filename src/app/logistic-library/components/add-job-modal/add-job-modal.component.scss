@@ -1,12 +1,19 @@
 .full-width-input{
     margin-top: 0;
     display: block;
-    widows: 50% !important;
+    widows: 70% !important;
     &:nth-child(1){
         margin-top: 0;
     }
 }
 
+.input-with-toggle{
+    width: 300px;
+}
+
+.mat-slide-toggle{
+    margin-left: 2rem !important;
+}
 
 .button-wrapper{
     width: 100%;
